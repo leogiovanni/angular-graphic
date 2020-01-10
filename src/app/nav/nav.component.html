@@ -1,0 +1,15 @@
+<header>
+  <nav class="container">
+    <ul class="logo">
+      <li><a routerLink="/">Angular + GraphQL</a></li>
+    </ul>
+  </nav>
+  <div class="container session">
+    <ul>
+      <li *ngIf="!authService.isUserLoggedIn()"><a routerLink="/login">Login</a></li>
+      <li *ngIf="authService.isUserLoggedIn()">Welcome {{authService.user() | uppercase}}, <a routerLink="/logout">Logout</a></li>
+    </ul>
+  </div>
+</header>
+
+

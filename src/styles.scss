@@ -1,1 +1,100 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+body, html {
+    height: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Montserrat';
+    font-size: 16px !important;
+}
+
+div, section {
+    display: block;
+    box-sizing: border-box;
+}
+
+section {
+    width: 100%;
+    margin: 0 auto;
+}
+
+a {
+    color: #3CC4AC;
+    text-align: center;
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1200px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+    flex: 0 0 100%;
+}
+
+.input {
+    border: 1px solid #c2c2c2;
+    height: 40px;
+    width: 100%; 
+    padding-left: 5px;
+    margin: 5px 0 5px 0;
+    border-radius: 3px;
+    font-size: 14px;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+}
+
+textarea:focus, input:focus, select:focus, button:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
+.input-error {
+    border: 1px solid red;
+}
+
+.btn {
+    padding: 10px 30px;
+    float: right;
+    background: #C0ECE4 !important;
+    border-color: #C0ECE4 !important;
+    border-radius: 3px; 
+    font-size: 14px;
+    color: #FFF;
+    margin-top: 5px;
+
+    &:hover{
+        background: #3CC4AC !important;
+    }
+
+    &:disabled:hover{
+        background: #C0ECE4 !important;  
+    }
+}
+
+.input-message-error{
+    color: red;
+    font-size: 10px;
+    padding-bottom: 5px;
+    display: block;
+}
+
+/* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.loading {
+    margin: 10px 5px;
+    width: 30px;
+}

@@ -1,0 +1,12 @@
+<div class="home">  
+    <form [formGroup]="formSearch" (ngSubmit)="onInputChange(formSearch.value)">    
+        <input class="input main-input" maxlength="100" placeholder="Address" (keyup)="onInputChange(formSearch.value)" formControlName="search" autocomplete="off" required>
+        <button type="submit" [disabled]="!formSearch.valid" class="btn main-btn" [ngClass]="{'main-btn-disabled': formSearch.valid == false}" *ngIf="!isLoading">
+            <img src="assets/imgs/find.png" class="img-input" alt="submit">
+        </button>
+        <div class="loading-div">
+           <img src="assets/imgs/loading.gif" class="loading" *ngIf="isLoading" style="float: right;">
+        </div>
+        <span class="input-message-error" *ngIf="formSearch.controls['search'].hasError('minLength')">Please enter at least 5 characters</span>
+    </form>  
+</div>

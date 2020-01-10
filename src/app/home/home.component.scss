@@ -1,0 +1,55 @@
+.home {
+    margin: 0 auto;
+    margin-top: 100px;
+    max-width: 700px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    font-size: 16px;
+}
+
+.main-input {
+    height: 70px !important;
+    padding-left: 20px;
+    color: #000;
+    border-color: #3CC4AC !important;
+    font-size: 20px;
+    overflow: hidden;
+}
+
+.img-input {
+    position: absolute;
+    bottom: 2px;
+    right: 12px;
+    width: 36px;
+    margin-bottom: 18px;
+}
+
+.main-btn {
+    border: 0 !important; 
+    background: transparent !important;
+    cursor: pointer;
+    padding: 0 !important;
+
+    &:hover{
+        background: transparent !important;
+    }
+}
+
+.main-btn-disabled {
+    cursor: default;
+}
+
+.loading-div {
+    margin : 0 auto;
+    width: 0%;
+    clear:both; 
+}
+
+.loading {
+    float: none !important;
+    margin: 10px 5px;
+    width: 30px;
+    margin-left: -15px;
+}
+
