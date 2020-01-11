@@ -1,5 +1,5 @@
 {
-  "name": "angular-graphql",
+  "name": "graphql",
   "version": "0.0.0",
   "scripts": {
     "npm": "ng",
