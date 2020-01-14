@@ -12,7 +12,6 @@
         @media screen and (max-width: 500px) {
             width: 100%;
             float: none;
-            text-align: left;
         }
     }
 
@@ -60,6 +59,71 @@
     padding-top: 40px;
 
     .loading { 
-        margin: 0 auto
+        margin: 0 auto;
+    }
+
+    .products {
+        width: 100%;
+
+        .product {
+            width: 25%;
+            float: left;
+            margin-top: 10px;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+
+            .prod {
+                padding: 5px;
+                border-radius: 3px;
+                height: 100%;
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+
+                .title {
+                    height: auto;
+                    min-height: 50px;
+                    width: 100%;
+                    min-height: 80px;
+                    background: #3CC4AB;
+                    color: #FFF;
+                    text-align: center;
+                    padding: 15px;
+                    border-top-left-radius: 3px;
+                    border-top-right-radius: 3px;
+                }
+
+                .description {
+                    width: 100%;
+                    height: 210px;
+                    position: relative;
+                    border: 1px solid #3CC4AB;
+                    border-bottom-left-radius: 3px;
+                    border-bottom-right-radius: 3px;
+
+                    .img {
+                        max-height: 100%;
+                        max-width: 100%;
+                        width: auto;
+                        height: auto;
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        margin: auto;
+                    }
+                }
+            }
+
+            @media screen and (max-width: 800px) {
+                width: 50%;
+            }
+
+            @media screen and (max-width: 500px) {
+                width: 100%;
+            }
+        }
     }
 }

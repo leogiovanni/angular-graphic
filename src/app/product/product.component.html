@@ -14,6 +14,7 @@
         <div class="poc">
             <label>Payment</label>
             <select class="select" formControlName="payment">
+                <option selected value="">Choose a category</option>
                 <option *ngFor="let payment of this.pocs[0].paymentMethods" selected value="{{payment.paymentMethodId}}">
                     {{payment.title}}
                 </option>
@@ -25,7 +26,6 @@
         </div>
     </form>
 </div>
-
 
 <div class="filter">
     <div class="loading">
@@ -41,10 +41,15 @@
                 </option>
             </select> 
         </div>
-        <div class="products" *ngFor="let product of this.products" >
-            <div class="products">{{product.title}}</div>
+        <div class="products">
+            <div class="product" *ngFor="let product of products">
+                <div class="prod">
+                    <div class="title">{{product.title}}</div>
+                <div class="description"><img src="{{product.images[0].url}}" class="img"/></div>
+                </div>
+            </div>
+            <p *ngIf="products.length < 1">No data found</p>
         </div>
     </div>
 </div>
-
 
