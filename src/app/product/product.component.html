@@ -38,7 +38,7 @@
     </div>
     <div *ngIf="isToLoadProducts">
         <div>
-            <label>Category</label> {{selectedCategory}}
+            <label>Category</label>
             <select class="select" *ngIf="!isLoadingCategories" (change)="loadProducts($event)" [(ngModel)]="selectedCategory">
                 <option value="null">All categories</option>
                 <option *ngFor="let category of categories" value="{{category.id}}">
