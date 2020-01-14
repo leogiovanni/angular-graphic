@@ -10,7 +10,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 4. npm install --save rxjs-compat
 
-5. ng add apollo-angular
+5. npm install --save express
+
+6. ng add apollo-angular
 
 ## Development server
 

@@ -4,6 +4,10 @@ import { ActivatedRoute } from "@angular/router";
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { DataService } from '../service/data.service';
+import { Apollo } from "apollo-angular";
+import gql from "graphql-tag";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/map";
 
 @Component({
   selector: 'app-home',
@@ -14,11 +18,12 @@ import { DataService } from '../service/data.service';
 export class HomeComponent implements OnInit {
 
   isLoading: boolean = false;
-  message: string = null;
   formSearch: FormGroup;
   search: string = null;
+  searchObject = null;
+  subscription: Array<any> = [];
 
-  constructor(private data: DataService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router) {  }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apollo: Apollo) {  }
 
   ngOnInit() {    
     this.formSearch = this.formBuilder.group({
@@ -28,13 +33,14 @@ export class HomeComponent implements OnInit {
 
   onInputChange(formSearch:NgForm) {
     this.search = formSearch['search'];
-    console.log(this.search);
+    
     if (this.search.length >= 5 && this.search.length <= 100) {
       this.isLoading = true;
+
       setTimeout(() => {
         this.isLoading = false;
-        console.log("222");
-      }, 1000);    
+        this.router.navigate(['/products']);
+      }, 1000); 
     }
   }
 }

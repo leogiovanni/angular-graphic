@@ -5,13 +5,15 @@ import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGaurdService } from './service/auth-gaurd.service';
+import { ProductComponent } from './product/product.component';
 
 const routes: Routes = [
   //{ path: '',       component: HomeComponent, canActivate:[AuthGaurdService] },
-  { path: '',       component: HomeComponent },
-  { path: 'login',  component: LoginComponent },
-  { path: 'logout', component: LogoutComponent, canActivate:[AuthGaurdService] },
-  { path: "**",     component: PageNotFoundComponent}, //wildcard 
+  { path: '',        component: HomeComponent },
+  { path: 'products',component: ProductComponent },
+  { path: 'login',   component: LoginComponent },
+  { path: 'logout',  component: LogoutComponent, canActivate:[AuthGaurdService] },
+  { path: "**",      component: PageNotFoundComponent}, //wildcard 
 ];
 
 @NgModule({

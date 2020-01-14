@@ -1,0 +1,58 @@
+.pocs {
+
+    .address {
+        width: 100%;
+        border: 1px solid #c2c2c2;
+        border-radius: 3px;
+        padding: 20px;
+        display: block;
+        clear: both;
+        text-align: center;
+
+        @media screen and (max-width: 500px) {
+            width: 100%;
+            float: none;
+            text-align: left;
+        }
+    }
+
+    .poc {
+        margin-top: 20px;
+        width: 50%;
+        float: left;
+        overflow: hidden;
+        
+        &:first-child {
+            padding-right: 5px;
+        }
+        &:last-child {
+            padding-left: 5px;
+        }
+
+        @media screen and (max-width: 500px) {
+            width: 100%;
+            float: none;
+            padding: 0;
+        }
+    }
+
+    .div-btn {
+        padding-top: 15px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+}
+
+.filter {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    clear: both;
+    padding-top: 40px;
+
+    .loading { 
+        margin: 0 auto
+    }
+}
