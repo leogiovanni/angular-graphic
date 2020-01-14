@@ -218,9 +218,9 @@ export class ProductComponent implements OnInit {
         },
         fetchPolicy: "network-only"
       })
-      .valueChanges.map((result: any) => result.data.poc.products)
+      .valueChanges.map((result: any) => result.data)
       .subscribe(data => {
-        this.products = data;
+        this.products = data.poc;
         setTimeout(() => {
           this.isLoadingProducts = false;
           this.isToLoadProducts = true;
