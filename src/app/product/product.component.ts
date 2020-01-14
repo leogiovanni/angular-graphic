@@ -220,7 +220,7 @@ export class ProductComponent implements OnInit {
       })
       .valueChanges.map((result: any) => result.data)
       .subscribe(data => {
-        this.products = data.poc;
+        this.products = data.poc.products;
         setTimeout(() => {
           this.isLoadingProducts = false;
           this.isToLoadProducts = true;
