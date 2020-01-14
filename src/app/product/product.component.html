@@ -1,3 +1,7 @@
+
+<div class="loading">
+    <img src="assets/imgs/loading.gif" class="loading" [hidden]="!isLoadingPocs">
+</div>
 <div class="pocs" *ngIf="!isLoadingPocs">
     <div class="address">
         <label>{{this.pocs[0].address.address1}}, {{this.pocs[0].address.number}}</label>
