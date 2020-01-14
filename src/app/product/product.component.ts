@@ -123,6 +123,8 @@ export class ProductComponent implements OnInit {
   searchObject = null;
   pocs: Array<any> = [];
   categories: Array<any> = [];
+  deliveryType: String = null;
+  paymentType: String = null;
   selectedCategory: String = null;
   products: Array<any> = [];
   isLoadingPocs: boolean = false;
@@ -201,6 +203,8 @@ export class ProductComponent implements OnInit {
 
   getProducts(formProducts:NgForm){
     this.isSearchingProducts = true;
+    this.deliveryType = formProducts['delivery'];
+    this.paymentType = formProducts['payment'];
     this.loadProducts();
   }
 

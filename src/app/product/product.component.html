@@ -5,23 +5,24 @@
     <form [formGroup]="formProducts" (ngSubmit)="getProducts(formProducts.value)">
         <div class="poc">
             <label>Delivery</label>
-            <select class="select" formControlName="delivery">
-                <option *ngFor="let delivery of this.pocs[0].deliveryTypes" selected value="{{delivery.deliveryTypeId}}">
+            <select class="select" formControlName="delivery" [(ngModel)]="deliveryType" required>
+                <option value="" selected></option>
+                <option *ngFor="let delivery of this.pocs[0].deliveryTypes, let i = index" value="{{delivery.deliveryTypeId}}">
                     {{delivery.title}} - {{delivery.subtitle}}
                 </option>
             </select> 
         </div> 
         <div class="poc">
             <label>Payment</label>
-            <select class="select" formControlName="payment">
-                <option selected value="">Choose a category</option>
-                <option *ngFor="let payment of this.pocs[0].paymentMethods" selected value="{{payment.paymentMethodId}}">
+            <select class="select" formControlName="payment" required>
+                    <option value="" selected></option>
+                <option *ngFor="let payment of this.pocs[0].paymentMethods, let i = index" value="{{payment.paymentMethodId}}">
                     {{payment.title}}
                 </option>
             </select> 
         </div>
         <div class="div-btn">
-            <button type="submit" *ngIf="!isSearchingProducts" class="btn" color="primary">Search</button>
+            <button type="submit" [disabled]="!formProducts.valid" *ngIf="!isSearchingProducts" class="btn" color="primary">Search</button>
             <img src="assets/imgs/loading.gif" class="loading" [hidden]="!isSearchingProducts" style="float: right;">
         </div>
     </form>
