@@ -33,9 +33,9 @@
     </div>
     <div *ngIf="isToLoadProducts">
         <div>
-            <label>Category</label>
-            <select class="select" *ngIf="!isLoadingCategories" (change)="loadProducts($event)">
-                <option value=""></option>
+            <label>Category</label> {{selectedCategory}}
+            <select class="select" *ngIf="!isLoadingCategories" (change)="loadProducts($event)" [(ngModel)]="selectedCategory">
+                <option value="null">All categories</option>
                 <option *ngFor="let category of categories" value="{{category.id}}">
                     {{category.title}}
                 </option>
@@ -45,10 +45,10 @@
             <div class="product" *ngFor="let product of products">
                 <div class="prod">
                     <div class="title">{{product.title}}</div>
-                <div class="description"><img src="{{product.images[0].url}}" class="img"/></div>
+                <div class="description"><img src="{{product.images[0].url}}" onerror="javascript:this.src='assets/imgs/no-image.png'" class="img"/></div>
                 </div>
             </div>
-            <p *ngIf="products.length < 1">No data found</p>
+            <p *ngIf="products.length < 1" class="no-data">No data found</p>
         </div>
     </div>
 </div>

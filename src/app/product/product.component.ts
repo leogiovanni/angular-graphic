@@ -123,6 +123,7 @@ export class ProductComponent implements OnInit {
   searchObject = null;
   pocs: Array<any> = [];
   categories: Array<any> = [];
+  selectedCategory: String = null;
   products: Array<any> = [];
   isLoadingPocs: boolean = false;
   isLoadingCategories: boolean = false;
@@ -207,6 +208,11 @@ export class ProductComponent implements OnInit {
     this.isToLoadProducts = false;
     this.isSearchingProducts = false;
     this.isLoadingProducts = true;
+    
+    this.selectedCategory = null;
+    if(category && category.target && category.target.value) {
+      this.selectedCategory = category.target.value ;
+    }
 
     this.apollo
       .watchQuery({
@@ -214,7 +220,7 @@ export class ProductComponent implements OnInit {
         variables: {
           "id": this.pocs[0].id,
           "search": "",
-          "categoryId": category ? category.target.value : null
+          "categoryId": this.selectedCategory
         },
         fetchPolicy: "network-only"
       })
