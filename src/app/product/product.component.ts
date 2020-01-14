@@ -204,7 +204,6 @@ export class ProductComponent implements OnInit {
   }
 
   loadProducts(category = null){
-    debugger
     this.isToLoadProducts = false;
     this.isSearchingProducts = false;
     this.isLoadingProducts = true;
@@ -226,7 +225,6 @@ export class ProductComponent implements OnInit {
           this.isLoadingProducts = false;
           this.isToLoadProducts = true;
         }, 1500);
-        
       });  
   }
 }
