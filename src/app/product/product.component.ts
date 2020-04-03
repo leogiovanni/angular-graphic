@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
-import {  FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { Router } from '@angular/router';
 import { ProductService } from '../service/product.service';
@@ -94,8 +94,8 @@ export class ProductComponent implements OnInit {
     this.isLoadingProducts = true;
     
     this.selectedCategory = null;
-    if(category && category.target && category.target.value) {
-      this.selectedCategory = category.target.value ;
+    if(category && category.target && category.target.value && category.target.value !== "null") {
+      this.selectedCategory = category.target.value;
     }
 
     this.productService.loadProductSearchMethod(this.pocs[0].id, this.selectedCategory)
