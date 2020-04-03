@@ -2,42 +2,45 @@
 <div class="loading">
     <img src="assets/imgs/loading.gif" class="loading" [hidden]="!isLoadingPocs">
 </div>
+
 <div class="pocs" *ngIf="!isLoadingPocs">
-    <div class="address">
+    <div class="pocs__address">
         <label>{{this.pocs[0].address.address1}}, {{this.pocs[0].address.number}}</label>
     </div> 
-    <form [formGroup]="formProducts" (ngSubmit)="getProducts(formProducts.value)">
-        <div class="poc">
-            <label>Delivery</label>
-            <select class="select" formControlName="delivery" [(ngModel)]="deliveryType" required>
-                <option value="" selected></option>
-                <option *ngFor="let delivery of this.pocs[0].deliveryTypes, let i = index" value="{{delivery.deliveryTypeId}}">
-                    {{delivery.title}} - {{delivery.subtitle}}
-                </option>
-            </select> 
-        </div> 
-        <div class="poc">
-            <label>Payment</label>
-            <select class="select" formControlName="payment" required>
+    <form [formGroup]="formProducts" (ngSubmit)="getProducts(formProducts.value)" class="pocs__search">
+        <div class="pocs__search__options">
+            <div class="pocs__search__options__poc">
+                <label>Delivery</label>
+                <select class="select" formControlName="delivery" required>
                     <option value="" selected></option>
-                <option *ngFor="let payment of this.pocs[0].paymentMethods, let i = index" value="{{payment.paymentMethodId}}">
-                    {{payment.title}}
-                </option>
-            </select> 
+                    <option *ngFor="let delivery of this.pocs[0].deliveryTypes, let i = index" value="{{delivery.deliveryTypeId}}">
+                        {{delivery.title}} - {{delivery.subtitle}}
+                    </option>
+                </select> 
+            </div> 
+            <div class="pocs__search__options__poc">
+                <label>Payment</label>
+                <select class="select" formControlName="payment" required>
+                        <option value="" selected></option>
+                    <option *ngFor="let payment of this.pocs[0].paymentMethods, let i = index" value="{{payment.paymentMethodId}}">
+                        {{payment.title}}
+                    </option>
+                </select> 
+            </div>
         </div>
-        <div class="div-btn">
+        <div class="pocs__search__btn">
             <button type="submit" [disabled]="!formProducts.valid" *ngIf="!isSearchingProducts" class="btn" color="primary">Search</button>
             <img src="assets/imgs/loading.gif" class="loading" [hidden]="!isSearchingProducts" style="float: right;">
         </div>
     </form>
 </div>
 
-<div class="filter">
+<div class="list">
     <div class="loading">
         <img src="assets/imgs/loading.gif" class="loading" [hidden]="!isLoadingProducts">
     </div>
     <div *ngIf="isToLoadProducts">
-        <div>
+        <div class="list__category">
             <label>Category</label>
             <select class="select" *ngIf="!isLoadingCategories" (change)="loadProducts($event)" [(ngModel)]="selectedCategory">
                 <option value="null">All categories</option>
@@ -46,14 +49,16 @@
                 </option>
             </select> 
         </div>
-        <div class="products">
-            <div class="product" *ngFor="let product of products">
-                <div class="prod">
-                    <div class="title">{{product.title}}</div>
-                <div class="description"><img src="{{product.images[0].url}}" onerror="javascript:this.src='assets/imgs/no-image.png'" class="img"/></div>
+        <div class="list__products">
+            <div class="list__products__product" *ngFor="let product of products">
+                <div class="list__products__product__title">
+                    <span class="list__products__product__title__text">{{product.title}}</span>
+                </div>
+                <div class="list__products__product__description">
+                    <img src="{{product.images[0].url}}" onerror="javascript:this.src='assets/imgs/no-image.png'" class="list__products__product__description__img"/>
                 </div>
             </div>
-            <p *ngIf="products.length < 1" class="no-data">No data found</p>
+            <p *ngIf="products.length < 1" class="list__products__no-data">No data found</p>
         </div>
     </div>
 </div>

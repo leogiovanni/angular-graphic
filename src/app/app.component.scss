@@ -1,19 +1,13 @@
-footer {
-    padding: 80px 0 0 0;
+.footer {
     box-sizing: border-box;
-    text-align: center;
     max-width: 1200px;
     position: relative;
     overflow: hidden;
-    width: 100%;
-    padding: 80px 10px 0px 10px;
-    margin: 0 auto;
-    flex: 0 0 100%;
+    padding: 40px 10px 30px 10px;
+    display: flex;
 
-    span {
+    &__copyright {
         font-size: 12px;
-        width: auto;
-        position: relative;
-        margin: 0 auto;
+        margin: auto;
     }
 }
