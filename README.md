@@ -1,4 +1,4 @@
-# Graphql
+# Angular 8 + GraphQL + BEM + FlexBox
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.22.
 
