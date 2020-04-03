@@ -1,114 +1,11 @@
 import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
-import {  FormBuilder, FormGroup, NgForm, Validators, AbstractControl } from '@angular/forms';
+import {  FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
-import { DataService } from '../service/data.service';
+import { ProductService } from '../service/product.service';
 import { Apollo } from "apollo-angular";
-import gql from "graphql-tag";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
-
-const pocSearchMethod = gql`
-  query pocSearchMethod($now: DateTime!, $algorithm: String!, $lat: String!, $long: String!) {
-    pocSearch(now: $now, algorithm: $algorithm, lat: $lat, long: $long) {
-      __typename
-      id
-      status
-      tradingName
-      officialName
-      deliveryTypes {
-        __typename
-        pocDeliveryTypeId
-        deliveryTypeId
-        price
-        title
-        subtitle
-        active
-      }
-      paymentMethods {
-        __typename
-        pocPaymentMethodId
-        paymentMethodId
-        active
-        title
-        subtitle
-      }
-      pocWorkDay {
-        __typename
-        weekDay
-        active
-        workingInterval {
-          __typename
-          openingTime
-          closingTime
-        }
-      }
-      address {
-        __typename
-        address1
-        address2
-        number
-        city
-        province
-        zip
-        coordinates
-      }
-      phone {
-        __typename
-        phoneNumber
-      }
-    }
-  }
-`;
-
-const categorySearchMethod = gql`
-  query allCategoriesSearch {
-    allCategory{
-      title
-      id
-    }
-  }
-`;
-
-const productSearchMethod = gql`
-  query poc($id: ID!, $categoryId: Int, $search: String){
-    poc(id: $id) {
-      id
-      products(categoryId: $categoryId, search: $search) {
-        id
-        title
-        rgb
-        images {
-          url
-        }
-        productVariants {
-          availableDate
-          productVariantId
-          price
-          inventoryItemId
-          shortDescription
-          title
-          published
-          volume
-          volumeUnit
-          description
-          subtitle
-          components {
-            id
-            productVariantId
-            productVariant {
-              id
-              title
-              description
-              shortDescription
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
 @Component({
   selector: 'app-product',
@@ -134,7 +31,7 @@ export class ProductComponent implements OnInit {
   isLoadingProducts: boolean = false;
   formProducts: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apollo: Apollo) {  }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apollo: Apollo, private productService: ProductService) {  }
 
   ngOnInit() {    
     this.isLoading = true;
@@ -160,34 +57,17 @@ export class ProductComponent implements OnInit {
       "now": "2017-08-01T20:00:00.000Z"
     };
 
-    this.apollo
-      .watchQuery({
-        query: pocSearchMethod,
-        variables: {
-          "now": this.searchObject.now, 
-          "algorithm": this.searchObject.algorithm, 
-          "lat": this.searchObject.lat, 
-          "long": this.searchObject.long
-        },
-        fetchPolicy: "network-only"
-      })
-      .valueChanges.map((result: any) => result.data.pocSearch)
+    this.productService.loadPocSearchMethod(this.searchObject)
       .subscribe(data => {
-        this.pocs = data;
-        this.isLoadingPocs = false;
-        this.checkLoading();
-      });  
+          this.pocs = data;
+          this.isLoadingPocs = false;
+          this.checkLoading();
+      });
   }
 
   loadCategories() {
     this.isLoadingCategories = true;
-
-    this.apollo
-      .watchQuery({
-        query: categorySearchMethod,
-        fetchPolicy: "network-only"
-      })
-      .valueChanges.map((result: any) => result.data.allCategory)
+    this.productService.loadCategorySearchMethod()
       .subscribe(data => {
         this.categories = data;
         this.isLoadingCategories = false;
@@ -218,17 +98,7 @@ export class ProductComponent implements OnInit {
       this.selectedCategory = category.target.value ;
     }
 
-    this.apollo
-      .watchQuery({
-        query: productSearchMethod,
-        variables: {
-          "id": this.pocs[0].id,
-          "search": "",
-          "categoryId": this.selectedCategory
-        },
-        fetchPolicy: "network-only"
-      })
-      .valueChanges.map((result: any) => result.data)
+    this.productService.loadProductSearchMethod(this.pocs[0].id, this.selectedCategory)
       .subscribe(data => {
         this.products = data.poc.products;
         setTimeout(() => {

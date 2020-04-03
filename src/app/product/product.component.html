@@ -9,7 +9,7 @@
     <form [formGroup]="formProducts" (ngSubmit)="getProducts(formProducts.value)">
         <div class="poc">
             <label>Delivery</label>
-            <select class="select" formControlName="delivery" [(ngModel)]="deliveryType" required>
+            <select class="select" formControlName="delivery" required>
                 <option value="" selected></option>
                 <option *ngFor="let delivery of this.pocs[0].deliveryTypes, let i = index" value="{{delivery.deliveryTypeId}}">
                     {{delivery.title}} - {{delivery.subtitle}}
