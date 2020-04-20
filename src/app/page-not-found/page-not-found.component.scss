@@ -1,0 +1,12 @@
+.not-found {
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    padding: 50px 10px 30px 10px;
+    display: flex;
+
+    &__message {
+        margin: auto;
+        font-weight: 100;
+    }
+}
