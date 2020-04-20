@@ -6,50 +6,55 @@
     overflow: hidden;
     position: relative;
     font-size: 16px;
-}
 
-.main-input {
-    height: 70px !important;
-    padding-left: 20px;
-    color: #000;
-    border-color: #3CC4AC !important;
-    font-size: 20px;
-    overflow: hidden;
-}
+    &__search {
+        height: 70px !important;
+        padding-left: 20px;
+        color: #000;
+        border-color: #3CC4AC !important;
+        font-size: 20px;
+        overflow: hidden;
+    }
 
-.img-input {
-    position: absolute;
-    bottom: 2px;
-    right: 12px;
-    width: 36px;
-    margin-bottom: 18px;
-}
-
-.main-btn {
-    border: 0 !important; 
-    background: transparent !important;
-    cursor: pointer;
-    padding: 0 !important;
-
-    &:hover{
+    &__btn {
+        border: 0 !important; 
         background: transparent !important;
+        cursor: pointer;
+        padding: 0 !important;
+
+        &:hover{
+            background: transparent !important;
+        }
+
+        &--disabled {
+            cursor: default;
+        }
+
+        &__img {
+            position: absolute;
+            bottom: 2px;
+            right: 12px;
+            width: 36px;
+            margin-bottom: 18px;
+        }
+    }
+
+    &__load {
+        margin : 0 auto;
+        width: 0%;
+        clear:both; 
+
+        &__loading {
+            float: none !important;
+            margin: 10px 5px;
+            width: 30px;
+            margin-left: -15px;
+            float: right;
+        }
     }
 }
 
-.main-btn-disabled {
-    cursor: default;
-}
 
-.loading-div {
-    margin : 0 auto;
-    width: 0%;
-    clear:both; 
-}
 
-.loading {
-    float: none !important;
-    margin: 10px 5px;
-    width: 30px;
-    margin-left: -15px;
-}
+
 

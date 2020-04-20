@@ -49,6 +49,25 @@ a {
     overflow: hidden;
     position: relative;
     box-sizing: border-box;
+
+    &--error {
+        border: 1px solid red;
+    }
+
+    &__message {
+        &--error {
+            color: red;
+            font-size: 10px;
+            padding-bottom: 5px;
+            display: block;
+        }
+        &--success {
+            color: green;
+            font-size: 10px;
+            padding-bottom: 5px;
+            display: block;
+        }
+    }
 }
 
 .select {
@@ -69,10 +88,6 @@ textarea:focus, input:focus, select:focus, button:focus {
     outline: 0;
 }
 
-.input-error {
-    border: 1px solid red;
-}
-
 .btn {
     padding: 10px 30px;
     float: right;
@@ -90,13 +105,6 @@ textarea:focus, input:focus, select:focus, button:focus {
     &:disabled:hover{
         background: #C0ECE4 !important;  
     }
-}
-
-.input-message-error{
-    color: red;
-    font-size: 10px;
-    padding-bottom: 5px;
-    display: block;
 }
 
 /* Change the white to any color ;) */
