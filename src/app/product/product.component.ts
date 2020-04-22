@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { Router } from '@angular/router';
 import { ProductService } from '../service/product.service';
-import { Apollo } from "apollo-angular";
-import { Observable } from "rxjs/Observable";
+import { SharedService } from '../service/shared.service';
 import "rxjs/add/operator/map";
+import { Location } from "../models/location.model";
 
 @Component({
   selector: 'app-product',
@@ -17,7 +17,7 @@ export class ProductComponent implements OnInit {
 
   isLoading: boolean = false;
   formSearch: FormGroup;
-  searchObject = null;
+  searchObject: Location = null;
   pocs: Array<any> = [];
   categories: Array<any> = [];
   deliveryType: String = null;
@@ -29,34 +29,42 @@ export class ProductComponent implements OnInit {
   isToLoadProducts: boolean = false;
   isSearchingProducts: boolean = false;
   isLoadingProducts: boolean = false;
+  dataFound: boolean = false;
   formProducts: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apollo: Apollo, private productService: ProductService) {  }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private productService: ProductService, private sharedService: SharedService) {  }
 
   ngOnInit() {    
-    this.isLoading = true;
-    this.isToLoadProducts = false;
-    this.isSearchingProducts = false;
-    this.isLoadingProducts = false;
-    this.loadPOC();
-    this.loadCategories();
-    this.checkLoading();
 
     this.formProducts = this.formBuilder.group({
       'delivery' : [null, [ Validators.required] ],
       'payment' : [null, [ Validators.required] ]
     });
+
+    this.loadLocation();
+
+    if (this.searchObject.algorithm !== undefined) {  
+      this.dataFound = true;
+      this.isLoading = true;
+      this.isToLoadProducts = false;
+      this.isSearchingProducts = false;
+      this.isLoadingProducts = false;
+      this.loadPOC();
+      this.loadCategories();
+      this.checkLoading();
+    }
+    else {
+      this.dataFound = false;
+      // this.router.navigate(['/']);
+    }
+  }
+
+  loadLocation(){
+    this.sharedService.sharedAddress.subscribe(location => this.searchObject = location);
   }
 
   loadPOC() {
     this.isLoadingPocs = true;
-    this.searchObject = {
-      "algorithm": "NEAREST",
-      "lat": "-23.632919",
-      "long": "-46.699453",
-      "now": "2017-08-01T20:00:00.000Z"
-    };
-
     this.productService.loadPocSearchMethod(this.searchObject)
       .subscribe(data => {
           this.pocs = data;

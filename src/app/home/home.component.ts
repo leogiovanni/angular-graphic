@@ -2,12 +2,8 @@ import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators, AbstractControl } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
-import { DataService } from '../service/data.service';
-import { Apollo } from "apollo-angular";
-import gql from "graphql-tag";
-import { Observable } from "rxjs/Observable";
-import "rxjs/add/operator/map";
+import { SharedService } from '../service/shared.service';
+import { Location } from "../models/location.model";
 
 @Component({
   selector: 'app-home',
@@ -22,8 +18,9 @@ export class HomeComponent implements OnInit {
   search: string = null;
   searchObject = null;
   subscription: Array<any> = [];
+  loc: Location = null;
 
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private apollo: Apollo) {  }
+  constructor(private formBuilder: FormBuilder, private router: Router, private sharedService: SharedService) {  }
 
   ngOnInit() {    
     this.formSearch = this.formBuilder.group({
@@ -35,7 +32,16 @@ export class HomeComponent implements OnInit {
     this.search = formSearch['search'];
     
     if (this.search.length >= 5 && this.search.length <= 100) {
+      
       this.isLoading = true;
+      this.loc = {
+        algorithm: 'NEAREST',
+        lat: '-23.632919',
+        long: '-46.699453',
+        now: '2017-08-01T20:00:00.000Z'
+      };
+
+      this.sharedService.setLocation(this.loc);
 
       setTimeout(() => {
         this.isLoading = false;

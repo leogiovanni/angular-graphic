@@ -148,3 +148,36 @@
     }
 }
 
+.no-data-found {
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    padding: 40px 10px 30px 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    &__message {
+        font-size: 12px;
+        color: red;
+        border: 1px solid red;
+        padding: 20px;
+        display: flex;
+        flex-shrink: 0;
+        border-radius: 3px;
+
+        &__text {
+            font-size: 12px;
+            margin: auto;
+            color: red;
+        }
+    }
+
+    &__link {
+        flex: 1;
+
+        &__btn {    
+            float: left !important;
+        }
+    }
+}
